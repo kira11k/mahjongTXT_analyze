@@ -20,6 +20,7 @@ def processAction(ref: RoundState, step_data: List[str]) -> Optional[str]:
 
         if action_str == 'M':  # 摸牌，進手排
             actor.tiles.append(step_data[3])
+            ref.mountainCount-=1
 
         if action_str == 'HD':  # 打牌，捨手排 去牌池
             actor.tiles.remove(step_data[3])
@@ -37,7 +38,7 @@ def processAction(ref: RoundState, step_data: List[str]) -> Optional[str]:
             ref.abandonTiles.remove(step_data[4])
             actor.tiles.append(step_data[4])
 
-        if action_str == 'H':  # Winner
+        if action_str == 'H' or action_str == 'SM':  # Winner or 自摸
             return step_data[1]
     except Exception:
         print("Err")

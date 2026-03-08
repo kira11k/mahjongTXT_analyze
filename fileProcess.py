@@ -16,6 +16,7 @@ class RoundState:
     stepStr: str = ""
     stepData: List[str] = field(default_factory=list)#1 主角 2 動作 3..10 排
     stepId: int = 0
+    mountainCount: int = 71
     player: List[playerState] = field(default_factory=lambda: [playerState() for _ in range(4)])
     abandonTiles: List[str] = field(default_factory=list)
 
@@ -23,6 +24,7 @@ class RoundState:
         return RoundState(
             stepStr=step_str,
             stepId=step_id,
+            mountainCount= self.mountainCount,
             player=[p.clone() for p in self.player],
             abandonTiles=self.abandonTiles.copy(),
         )
